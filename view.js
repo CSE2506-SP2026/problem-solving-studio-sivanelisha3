@@ -1,5 +1,37 @@
 // ---- Define your dialogs  and panels here ----
 
+// permissions explanation dialog
+let permissions_explanation_dialog = define_new_dialog(
+    "permissions_explanation_dialog",
+    "Permission Explanation",
+    { width: 500, height: 300 }
+);
+
+
+// effective permissions panel
+let effective_permissions_panel = define_new_effective_permissions(
+  "effective_permissions_panel",
+  true
+);
+
+// user select field
+let effperm_user_select = define_new_user_select_field(
+    "effperm_user_select",
+    "Select User",
+    function(selected_user) {
+        $('#effective_permissions_panel').attr('username', selected_user);
+    }
+);
+
+$("#sidepanel").append(effperm_user_select);
+$("#sidepanel").append(effective_permissions_panel);
+
+$('#effective_permissions_panel').attr('filepath', '/C/presentation_documents');
+
+$(document).on('click', '.perm_info', function(e) {
+    console.log('clicked!');
+    permissions_explanation_dialog.dialog('open');
+});
 
 
 // ---- Display file structure ----
